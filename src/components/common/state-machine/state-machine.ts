@@ -158,7 +158,23 @@ const authStateMachine = createMachine(
       [PATH_NAMES.CREATE_ACCOUNT_SET_PASSWORD]: {
         on: {
           [USER_JOURNEY_EVENTS.PASSWORD_CREATED]: [
-            PATH_NAMES.CREATE_ACCOUNT_ENTER_PHONE_NUMBER,
+            {
+              target: [PATH_NAMES.CREATE_ACCOUNT_ENTER_PHONE_NUMBER],
+              cond: "requiresTwoFactorAuth"
+            },
+            {
+              target: [PATH_NAMES.UPDATED_TERMS_AND_CONDITIONS],
+              cond: "isLatestTermsAndConditionsAccepted",
+            },
+            {
+              target: [PATH_NAMES.PROVE_IDENTITY],
+              cond: "isIdentityRequired",
+            },
+            {
+              target: [PATH_NAMES.SHARE_INFO],
+              cond: "isConsentRequired",
+            },
+            { target: [PATH_NAMES.AUTH_CODE] },
           ],
         },
       },
