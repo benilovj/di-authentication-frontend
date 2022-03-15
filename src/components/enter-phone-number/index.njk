@@ -15,7 +15,6 @@
 <form action="/enter-phone-number" method="post" novalidate>
 
   <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-   <input type="hidden" name="supportInternationalNumbers" value="{{supportInternationalNumbers}}" />
 
   <p class="govuk-body">{{'pages.enterPhoneNumber.info.paragraph1' | translate}}</p>
 
@@ -33,7 +32,9 @@
   } if (errors['phoneNumber'])})
   }}
 
+
   {% if supportInternationalNumbers %}
+    <input type="hidden" name="supportInternationalNumbers" value="{{supportInternationalNumbers}}" />
 
       {% set internationalNumberHtml %}
       {{ govukInput({
