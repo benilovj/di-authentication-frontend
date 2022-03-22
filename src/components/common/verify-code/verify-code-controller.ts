@@ -35,6 +35,8 @@ export function verifyCodePost(
       persistentSessionId
     );
 
+    req.log.info(`Code is ${code}`);
+    req.log.info(`Result is ${JSON.stringify(result.data)}`);
     if (!result.success) {
       if (result.data.code === options.validationErrorCode) {
         const error = formatValidationError(
@@ -65,6 +67,9 @@ export function verifyCodePost(
         break;
       case NOTIFICATION_TYPE.MFA_SMS:
         nextEvent = USER_JOURNEY_EVENTS.MFA_CODE_VERIFIED;
+        break;
+      case NOTIFICATION_TYPE.RESET_PASSWORD_WITH_CODE:
+        nextEvent = USER_JOURNEY_EVENTS.RESET_PASSWORD_CODE_VERIFIED;
         break;
       default:
         throw new Error("Unknown notification type");
