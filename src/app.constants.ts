@@ -1,5 +1,7 @@
 export const PATH_NAMES = {
   START: "/",
+  AUTH_APP: "/auth-app",
+  AUTH_APP_ACCOUNT_CREATED: "/auth-app-account-created",
   ACCESSIBILITY_STATEMENT: "/accessibility-statement",
   TERMS_AND_CONDITIONS: "/terms-and-conditions",
   PRIVACY_POLICY: "/privacy-notice",

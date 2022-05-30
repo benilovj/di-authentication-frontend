@@ -35,6 +35,7 @@ import { enterPhoneNumberRouter } from "./components/enter-phone-number/enter-ph
 import { pageNotFoundHandler } from "./handlers/page-not-found-handler";
 import { serverErrorHandler } from "./handlers/internal-server-error-handler";
 import { csrfMiddleware } from "./middleware/csrf-middleware";
+import { authAppRouter } from "./components/auth-app/auth-app-routes";
 import { checkYourPhoneRouter } from "./components/check-your-phone/check-your-phone-routes";
 import { landingRouter } from "./components/landing/landing-route";
 import { getCSRFCookieOptions } from "./config/cookie";
@@ -75,6 +76,7 @@ const APP_VIEWS = [
 ];
 
 function registerRoutes(app: express.Application, appEnvIsProduction: boolean) {
+  app.use(authAppRouter);
   app.use(landingRouter);
   app.use(signInOrCreateRouter);
   app.use(enterEmailRouter);

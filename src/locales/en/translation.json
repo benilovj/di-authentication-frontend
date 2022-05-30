@@ -355,6 +355,21 @@
         }
       }
     },
+    "authApp": {
+      "title": "Set up an authenticator app",
+      "header": "Set up an authenticator app",
+      "info": {
+        "listItem1": "Open your authenticator app or your smartphone, table or computer.",
+        "listItem2": "Use your authenticator app to the QR core or type the secret key into your authenticator app. Some authenticator apps call the secret key a 'code'",
+        "listItem3": "The authenticator app will show an access code.",
+        "listItem4": "Enter the access code."
+      },
+      "secretKey": "Secret key:",
+      "enterCode": {
+        "label": "Access code",
+        "hint": "This is the number shown in your authenticator app"
+      }
+    },
     "checkYourPhone": {
       "title": "Check your phone",
       "header": "Check your phone",

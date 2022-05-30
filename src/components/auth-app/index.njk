@@ -1,0 +1,60 @@
+{% extends "common/layout/base.njk" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% set pageTitleName = 'pages.authApp.title' | translate %}
+
+{% block content %}
+
+{% include "common/errors/errorSummary.njk" %}
+
+<h1 class="govuk-heading-l govuk-!-margin-top-0 govuk-!-margin-bottom-3">{{'pages.authApp.header' | translate }}</h1>
+
+<form action="/auth-app" method="post" novalidate>
+  <input type="hidden" name="_csrf" value="{{csrfToken}}"/>
+  <input type="hidden" name="secretKey" value="{{secretKey}}"/>
+
+<ol class="govuk-list govuk-list--number">
+    <li>{{'pages.authApp.info.listItem1' | translate}}</li>
+
+    <li>{{'pages.authApp.info.listItem2' | translate}}</li>
+
+    <img src="{{qrCode}}" alt="QR Code Image">
+    <p class="govuk-body">
+        {{ 'pages.authApp.secretKey' | translate }}
+        <span class="govuk-body govuk-!-font-weight-bold">{{secretKey}}</span>
+    </p>
+     <li>{{'pages.authApp.info.listItem3' | translate}}</li>
+
+     <li>{{'pages.authApp.info.listItem4' | translate}}</li>
+</ol>
+
+
+{{ govukInput({
+    label: {
+        text: 'pages.authApp.enterCode.label' | translate
+    },
+    hint: {
+        text: 'pages.authApp.enterCode.hint' | translate
+    },
+  classes: "govuk-!-width-one-quarter govuk-!-font-weight-bold",
+    id: "authCode",
+    name: "authCode",
+    value: authCode,
+    type: number,
+    autocomplete: "off",
+    errorMessage: {
+        text: errors['email'].text
+    } if (errors['email'])})
+}}
+
+  {{ govukButton({
+  "text": button_text|default('general.continue.label' | translate, true),
+  "type": "Submit",
+  "preventDoubleClick": true
+  }) }}
+
+</form>
+
+{% endblock %}
